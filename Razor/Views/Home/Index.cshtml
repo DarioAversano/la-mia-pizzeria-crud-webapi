@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="text-center">
+    <!-- 1 -->
+    <p>1. Dichiarare una variabile valorizzandola con il nostro nome.
+        @{
+            string myName = "Dario";
+        }
+    </p>
+   
+    <p>Dichiarare un'altra variabile valorizzandola con il nostro cognome. 
+        @{
+            string mySurname = "Aversano";
+        }
+    </p>
+        
+        <p>Stampare il nostro nome e cognome all'interno di un tag h2.
+
+    <h2>@myName @mySurname</h2>
+
+    </p>
+
+    <!-- 2 -->
+    <p>2. Creare una funzione che stampa la somma dei numeri che vanno da 1 a n (con n passato come parametro - n incluso)
+    Stampare dentro uno span il risultato.
+
+        @{
+            int sommaNumeri(int n)
+            {
+                int addizione = 0;
+
+                for (int i = 1; i < n; i++)
+                {
+                    addizione = addizione + i;
+                }
+
+                return addizione;
+            }
+        }
+
+        @{
+            int n = 5;
+        }
+        <br />
+        <h2>
+            <span>La somma dei numeri da "1" a  @n è uguale a @sommaNumeri(n)</span>
+        </h2>
+</p>
+
+    <p>3. Contare quante volte la lettera a è presente nalla frase "nel mezzo del cammin di nostra vita" e stampare questo valore in pagina</p>
+    @{
+        string frase = "nel mezzo del cammin di nostra vita";
+        int conteggio = 0;
+
+        foreach (char carattereA in frase)
+        {
+            if (carattereA == 'a')
+            {
+                conteggio++;
+            }
+        }
+    }
+
+    <h2>La lettera "a" è presente @conteggio volte.</h2>
+
+    <p>
+        4. Creare una List<int> di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) e mostrare in pagina solo i numeri compresi tra 20 e 70</p>
+
+    @{
+        Random random = new Random();
+        List<int> numeri = new List<int>();
+
+        for (int i = 0; i < 20; i++)
+        {
+            int numero = random.Next(1, 91);
+
+            numeri.Add(numero);
+        }
+    }
+    <ol>
+        @foreach (int nR in numeri)
+        {
+            if (nR >= 20 && n <= 70)
+            {
+
+
+                <li>@nR</li>
+
+            }
+        }
+    </ol>
+
+       <p> 5. Stampare in pagina la data e l'ora attuale (usando la classe DateTime) con il formato anno-mese-giorno ore:minuti:secondi</p>
+
+      <h2>@DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss")</h2>
+
+
+       <p> 6. Partendo dalla data di oggi (usando la classe DateTime) stampare in pagina
+        a. la data di 7 giorni fa
+        b. che giorno della settimana è oggi (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)</p>
+        c. che giorno della settimana sarà nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrà essere il nome del giorno (Lunedì, Martedì, ...)</p>
+    </p>
+
+    <h2>@DateTime.Now.AddDays(-7).ToString("yyyy/MM/dd")</h2>
+    <h2>@DateTime.Today.ToString("dddd")</h2>
+    <h2>@DateTime.Today.AddYears(1).ToString("dddd")</h2>
+
+</div>
+

@@ -1,0 +1,39 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  
+}
+
+.fontsize_large {
+    font-size: 24px;
+}
+
+.background_color_orange {
+    background-color: orange;
+}
+
+.background_color_secondary {
+    background-color: secondary;
+}
+
+.img_square {
+    aspect-ratio: 1 / 1;
+}
+
+.site-font {
+    color: white;
+}

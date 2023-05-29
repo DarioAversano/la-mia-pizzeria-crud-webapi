@@ -1,0 +1,55 @@
+﻿@using LaMiaPizzeria.Models.ModelForView
+@model PizzaListCategory
+
+
+<div class="container">
+    <h2 class="mb-3">Inserisci Nuova Pizza Nel Menu''</h2>
+    <form asp-controller="Pizza" asp-action="Creazione" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label asp-for="Pizzas.NomePizza" class="form-label">Nome</label>
+            <input asp-for="Pizzas.NomePizza" type="text" class="form-control" required>
+            <span asp-validation-for="Pizzas.NomePizza" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pizzas.Descrizione" class="form-label">Descrizione</label>
+            <textarea asp-for="Pizzas.Descrizione" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="Pizzas.Descrizione" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pizzas.Immagine" class="form-label">URL Immagine</label>
+            <input asp-for="Pizzas.Immagine" type="text" class="form-control" required>
+            <span asp-validation-for="Pizzas.Immagine" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Pizzas.Prezzo" class="form-label">Prezzo</label>
+            <input asp-for="Pizzas.Prezzo" type="text" rows="1" class="form-control">
+            <span asp-validation-for="Pizzas.Prezzo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <p>Categoria:</p>
+            <select asp-for="Pizzas.PizzaCategoryId" rows="10" class="d-block w-100">
+                <option value=""></option>
+                @foreach (PizzaCategory category in Model.PizzasCategories)
+                {
+                    @if (Model.Pizzas.PizzaCategoryId == category.Id)
+                    {
+                        <option value="@category.Id" selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary">Salva</button>
+    </form>
+</div>
+
+

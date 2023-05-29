@@ -1,0 +1,14 @@
+﻿@model  PizzaModel
+@{
+    var pizza = Model; 
+}
+<div class="container-fluid text-white">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="upper-headers text-center mt-4">Pizza: @pizza.NomePizza</h3>
+            <img height="200" width="150" src="@pizza.Immagine" alt="@pizza.NomePizza" class="d-block m-auto border border-black" />
+            <p class="text-center mt-3 site-font">@pizza.Descrizione</p>
+            <p class="text-center mt-3 site-font">@pizza.Category.Name</p>
+        </div>
+    </div>
+</div>
