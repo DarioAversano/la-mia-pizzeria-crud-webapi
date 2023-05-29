@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaMiaPizzeria.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PizzaAPIController : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetPizzs()
+        public IActionResult GetPizzas()
         {
             using (PizzaContext db = new PizzaContext())
             {
-                List<PizzaModel> pizze = db.Pizza.ToList();
-                return Ok(pizze);
+                List<PizzaModel> pizza = db.Pizza.ToList();
+                return Ok(pizza);
             }
         }
 
@@ -37,11 +37,11 @@ namespace LaMiaPizzeria.Controllers.API
         }
 
         [HttpGet("{id}")]
-        public IActionResult SearchByNomePizza(string nomePizza)
+        public IActionResult SearchByName(string nomePizza)
         {
             using (PizzaContext db = new PizzaContext())
             {
-                PizzaModel? pizzaToSearch = db.Pizza.Where(pizze => pizze.NomePizza.Contains(nomePizza)).FirstOrDefault(); // == solo stringa
+                PizzaModel? pizzaToSearch = db.Pizza.Where(pizze => pizze.NomePizza.Contains(nomePizza)).FirstOrDefault(); // == solo INT ! stringa
 
                 if (pizzaToSearch != null)
                 {
@@ -49,7 +49,7 @@ namespace LaMiaPizzeria.Controllers.API
                 }
                 else
                 {
-                    return NotFound();
+                    return NotFound("Non ho trovato la pizza");
                 }
             }
         }
@@ -65,14 +65,42 @@ namespace LaMiaPizzeria.Controllers.API
             {
                 using (PizzaContext db = new PizzaContext())
                 {
-                    PizzaModel savedPizza = db.Pizza.Add(pizza).Entity;
+                    db.Pizza.Add(pizza);
                     db.SaveChanges();
 
-                    return Create(savedPizza);
+                    return Ok();
 
                 }
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            using (PizzaContext db = new PizzaContext())
+            {
+                PizzaModel? pizzaToDelete = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                if (pizzaToDelete != null)
+                {
+                    db.Remove(pizzaToDelete);
+                    db.SaveChanges();
+
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound("Non ho trovato la pizza da eliminare");
+
+                }
+            }
+        }
+
+
+
+
+
+
 
 
 
